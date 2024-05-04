@@ -73,9 +73,13 @@ class bot_ads:
 
     def ads_send(self):
         while True:
-            self.bot.send_message(self.ID_CH,self.MSG)
-            print(f"BOT: ads publicated for channel id : {self.ID_CH}:: time {datetime.now()}")
-            print(f"BOT: ads_bot sleeping {self.TIMES} :: time : {self.TIMES}")
+            for i in self.ID_CH:
+                try:
+                    self.bot.send_message(i,self.MSG)
+                except:
+                    print(f"BOT: id_channel not found :: time {datetime.now()}")
+                print(f"BOT: ads publicated for channel id : {self.ID_CH}:: time {datetime.now()}")
+                print(f"BOT: ads_bot sleeping {self.TIMES} :: time : {datetime.now()}")
             time.sleep(self.TIMES)
 
 
@@ -92,30 +96,6 @@ class bot_ads:
             
 
 
-
-
-
-
-
-
-def main():
-    bot = bot_ads(config.TOKEN,config.ID_CHANNEL,config.MSG,config.TIME)
-    print(bot.art)
-    attempt_connection = 0
-    while True:
-        try:
-            bot.run()
-            attempt_connection = 0
-        except:
-            attempt_connection += 1
-            print(f"BOT: connection lost or not token :: attempt {attempt_connection}:{config.ATTEMPT} :: time : {datetime.now()}")
-
-            if attempt_connection >= config.ATTEMPT:
-                break
-            time.sleep(1)
-        
-    print(f"BOT: finished work :: time {datetime.now()}")
-    print(bot.art2)
 
 
 
